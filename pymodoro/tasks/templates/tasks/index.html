@@ -1,0 +1,9 @@
+{% if task_list %}
+    <ol>
+        {% for task in task_list %}
+            <li><a href="/tasks/{{task.id}}/">{{task.name}}</a></li>
+        {% endfor %}
+    </ol>
+{% else %}
+    <p>No tasks! Woohoo!</p>
+{% endif %}
