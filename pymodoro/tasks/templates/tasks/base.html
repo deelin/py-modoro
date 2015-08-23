@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author", content="Dennis Lin, dennis.of.lin@gmail.com">
+        <title>Pymodoro</title>
+
+        <!-- Custom boostrap style -->
+        <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom jumbotron style -->
+        <link href="/static/bootstrap/css/jumbotron.css" rel="stylesheet">
+    </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Pymodoro</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+
+        {% if user.is_authenticated %}
+          <form class="navbar-form navbar-right" method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <button type="submit" class="btn btn-failure">Sign Out</button>
+          </form>
+        {% else %}
+          <form class="navbar-form navbar-right" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="text" id="id_username" name="username" placeholder="Username" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" id="id_password" name="password" placeholder="Password" class="form-control">
+            </div>
+            <input type="hidden" name="next" value="{{ next }}" />
+            <button type="submit" value="login" class="btn btn-success">Sign in</button>
+          </form>
+        {% endif %}
+        </div>
+      </div>
+    </nav>
+    {% block alerts %}{% endblock alerts %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        {% block welcome %}{% endblock welcome %}
+      </div>
+    </div>
+
+    <div class="container">
+      {% block content %}{%endblock content %}
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/bootstrap/js/bootstrap.min.js"/>
+  </body>
+</html>

@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 LOGIN_URL = ''
 LOGIN_REDIRECT_URL = '/tasks'
+STATIC_URL = '/static/'
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -59,9 +60,7 @@ ROOT_URLCONF = 'pymodoro.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'pymodoro', 'templates'),
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

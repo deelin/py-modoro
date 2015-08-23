@@ -16,10 +16,20 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from . import views
-
 urlpatterns = [
-    url(r'^register/$', views.create_user, name='create_user'),
-    url(r'^tasks/', include('tasks.urls'), name='tasks'),
-    url(r'^$', 'django.contrib.auth.views.login', name='login'),
+    url(r'^$', 'tasks.views.home', name='home'),
+
+    # User Accounts
+    url(r'^create_user$', 'tasks.views.create_user', name='create_user'),
+    url(r'^login$', 'django.contrib.auth.views.login', name='login', kwargs={
+        'template_name': 'tasks/home.html',
+    }),
+    url(r'^logout$', 'django.contrib.auth.views.logout', name='logout', kwargs={
+        'next_page': 'home',
+    }),
+
+    # Tasks
+    url(r'^tasks/$', 'tasks.views.index', name='index'),
+
+    # Timers
 ]

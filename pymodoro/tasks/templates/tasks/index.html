@@ -1,9 +1,19 @@
+{% extends "tasks/base.html" %}
+
+{% block welcome %}
+<h1>Tasks</h1>
+{% endblock %}
+
+{% block content %}
 {% if task_list %}
-    <ol>
-        {% for task in task_list %}
-            <li><a href="/tasks/{{task.id}}/">{{task.name}}</a></li>
-        {% endfor %}
-    </ol>
+  <ol>
+    {% for task in task_list %}
+      <li><a href="/tasks/{{task.id}}/">{{task.name}}</a></li>
+    {% endfor %}
+  </ol>
 {% else %}
+  <div class="alert alert-info" role="alert">
     <p>No tasks! Woohoo!</p>
+  </div>
 {% endif %}
+{% endblock %}
