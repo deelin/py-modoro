@@ -1,0 +1,15 @@
+Pomodoros only count is you complete the ENTIRE 25 minutes
+After a pomodoro, you get a 5 minutes break
+After 4 pomodoros, you get a 30 minute break
+
+Locked into the timer until task is done. Timer for break then
+starts. You have an option to STOP
+
+Finite state machine:
+
+READY -> Start -> STARTED -> 25 minutes finish -> FINISHED
+                          -> Leave page/stop timer -> READY
+
+Passwords are stored as plaintext right now. Couldn't figure out
+django.contrib.auth.models.User and how it hashes its passwords.
+Definitely needs to be done in a real app

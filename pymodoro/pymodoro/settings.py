@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 LOGIN_URL = ''
-LOGIN_REDIRECT_URL = '/tasks'
+LOGIN_REDIRECT_URL = '/'
 STATIC_URL = '/static/'
 
 INSTALLED_APPS = (

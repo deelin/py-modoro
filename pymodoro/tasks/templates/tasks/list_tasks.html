@@ -1,0 +1,33 @@
+{% extends "tasks/base.html" %}
+
+{% block welcome %}
+<h1>Tasks</h1>
+{% endblock %}
+
+{% block content %}
+<!-- tasks header -->
+<h2 class="sub-header">
+  <div>
+    <form method="POST" action="{% url 'create' %}">
+      {% csrf_token %}
+      <div class="input-group">
+        <input type="text" name="taskname" class="form-control" autofocus="true" placeholder="Enter a task name" required>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Create</button>
+          </span>
+        </div>
+    </form>
+  </div>
+</h2>
+{% if tasks %}
+  <ol>
+    {% for task in tasks %}
+      <li><a href="/tasks/{{task.id}}/">{{task.name}}</a></li>
+    {% endfor %}
+  </ol>
+{% else %}
+  <div class="alert alert-info" role="alert">
+    <p>No tasks! Woohoo!</p>
+  </div>
+{% endif %}
+{% endblock %}

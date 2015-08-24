@@ -29,7 +29,11 @@ urlpatterns = [
     }),
 
     # Tasks
-    url(r'^tasks/$', 'tasks.views.index', name='index'),
+    url(r'^tasks/$', 'tasks.views.list_tasks', name='list'),
+    url(r'^tasks/new$', 'tasks.views.create_task', name='create'),
+    url(r'^tasks/$', 'tasks.views.get_task', name='get'),
+    url(r'^tasks/$', 'tasks.views.update_task', name='update'),
+    url(r'^tasks/$', 'tasks.views.delete_task', name='delete'),
 
     # Timers
 ]

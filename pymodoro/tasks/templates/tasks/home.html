@@ -1,11 +1,6 @@
 {% extends "tasks/base.html" %}
 
 {% block alerts %}
-{% if created_user %}
-  <div class="alert alert-success" role="alert">
-    <p>Congratulations! Your account has been created. You may now sign in.</p>
-  </div>
-{% endif %}
 {% if form.errors %}
   <div class="alert alert-danger" role="alert">
     <p>Your username and password didn't match. Please try again.</p>
