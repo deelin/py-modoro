@@ -1,0 +1,21 @@
+{% extends "tasks/base.html" %}
+
+{% block welcome %}
+<h1>Update Task</h1>
+{% endblock %}
+
+{% block content %}
+{% if task %}
+<div>
+  <form method="POST" action="/tasks/{{ task.id }}/update">
+    {% csrf_token %}
+    <div class="input-group">
+      <input type="text" name="taskname" class="form-control" autofocus="true" value="{{ task.name }}" required>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Update</button>
+      </span>
+    </div>
+  </form>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "tasks/base.html" %}
+
+{% block welcome %}
+<h1>Task</h1>
+{% endblock %}
+
+{% block content %}
+{% if task %}
+<div>
+  <p>Name: {{ task.name }}</p>
+  <p>Pomodoros: {{ task.pomodoros }}</p>
+</div>
+{% endif %}
+{% endblock %}

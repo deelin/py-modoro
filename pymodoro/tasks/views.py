@@ -30,6 +30,7 @@ def create_user(request):
 
 @login_required
 def list_tasks(request, template_name='tasks/list_tasks.html'):
+    print "LIST"
     print request.user.id
     user = User.objects.get(pk=request.user.id)
     tasks = Task.objects.filter(user=user)
@@ -37,6 +38,7 @@ def list_tasks(request, template_name='tasks/list_tasks.html'):
 
 @login_required
 def create_task(request):
+    print "CREATE"
     if request.method == 'POST':
         task_name = request.POST['taskname']
         if task_name:
@@ -47,13 +49,24 @@ def create_task(request):
     return redirect('home')
 
 @login_required
-def get_task(request, template_name='tasks/get_tasks.html'):
-    return render(request, template_name)
+def get_task(request, task_id, template_name='tasks/task.html'):
+    task = Task.objects.get(pk=task_id)
+    return render(request, template_name, {'task': task})
 
 @login_required
-def update_task(request, template_name='tasks/update_tasks.html'):
-    return render(request, template_name)
+def update_task(request, task_id, template_name='tasks/update_tasks.html'):
+    task = Task.objects.get(pk=task_id)
+    if request.method == "GET":
+        return render(request, template_name, {'task': task})
+    
+    if request.method == "POST":
+        task_name = request.POST['taskname']
+        task.name = task_name
+        task.save()
+    return redirect('home')
 
 @login_required
-def delete_task(request, template_name='tasks/delete_tasks.html'):
-    return render(request, template_name)
+def delete_task(request, task_id):
+    task = Task.objects.get(pk=task_id)
+    task.delete()
+    return redirect('home')
