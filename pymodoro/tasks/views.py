@@ -7,6 +7,8 @@ from django.shortcuts import redirect, render
 from forms import UserForm
 from models import Task
 
+POMODORO_TIME = 0.05
+
 def home(request):
     if request.user.is_authenticated():
         return redirect('list')
@@ -69,4 +71,17 @@ def update_task(request, task_id, template_name='tasks/update_tasks.html'):
 def delete_task(request, task_id):
     task = Task.objects.get(pk=task_id)
     task.delete()
+    return redirect('home')
+
+@login_required
+def start_task(request, task_id, template_name='tasks/start.html'):
+    task = Task.objects.get(pk=task_id)
+    return render(request, template_name, {'task': task, 'POMODORO_TIME': POMODORO_TIME})
+
+@login_required
+def finish_task(request, task_id):
+    task = Task.objects.get(pk=task_id)
+    task.pomodoros += 1
+    task.total_time += 25
+    task.save()
     return redirect('home')

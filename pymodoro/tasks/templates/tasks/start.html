@@ -1,0 +1,15 @@
+{% extends "tasks/base.html" %}
+
+{% block welcome %}
+<h1 id="counter" data-pom_time="{{ POMODORO_TIME }}" data-finish="#finishForm">{{ POMODORO_TIME }}:00</h1>
+<form id="finishForm" action="/tasks/{{task.id}}/finish" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="taskid" value="{{task.id}}"/>
+</form>
+{% endblock %}
+
+{% block content %}
+{% if task %}
+Pomodoro for {{ task.name }} ongoing...
+{% endif %}
+{% endblock %}
