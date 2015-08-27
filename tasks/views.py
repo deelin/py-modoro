@@ -7,7 +7,7 @@ from django.shortcuts import redirect, render
 from forms import UserForm
 from models import Task
 
-POMODORO_TIME = 0.05
+POMODORO_TIME = 25
 
 def home(request):
     if request.user.is_authenticated():
