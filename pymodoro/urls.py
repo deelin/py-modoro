@@ -40,6 +40,4 @@ urlpatterns = [
     # Timers
     url(r'^tasks/(?P<task_id>[0-9]+)/start$', 'tasks.views.start_task', name='start'),
     url(r'^tasks/(?P<task_id>[0-9]+)/finish$', 'tasks.views.finish_task', name='finish'),
-
-    # Statics
 ]
