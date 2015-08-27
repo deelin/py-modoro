@@ -23,16 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'u0kyu=5erknlhwxu((!yndds0)z2b_rr0k0jr2$o%p2@4!ili)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
-LOGIN_URL = ''
-LOGIN_REDIRECT_URL = '/'
-STATIC_URL = '/static/'
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -79,11 +75,12 @@ WSGI_APPLICATION = 'pymodoro.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(
+        default='sqlite:////{0}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
+    )
 }
 
 
@@ -105,3 +102,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+
+# CUSTOM
+LOGIN_URL = ''
+LOGIN_REDIRECT_URL = '/'
